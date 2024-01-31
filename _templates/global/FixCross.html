@@ -1,0 +1,29 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+
+{{ endblock }}
+
+{{ block scripts }}
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            let dJitterTime = 1000 + Math.random()*2000;
+            window.setTimeout(()=>{
+                endPage();
+            },dJitterTime);
+        });
+    </script>
+{{ endblock }}
+
+
+{{ block PageContent }}
+
+<div class="screen-content">
+    <div id="fix-cross"> + </div>
+</div>
+<input type="hidden" id="sStart" name="sStartCross">
+<input type="hidden" id="sEnd" name="sEndCross">
+<button style="display: none"> submit </button>
+
+
+{{ endblock }}

@@ -1,0 +1,32 @@
+{{ extends "global/Page.html" }}
+
+{{ block PageContent }}
+    <div class="prevDiv" id="prevDiv">
+        <a id="leftArrow" class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <p id="prevKey" class="prev-key"> <b>or press [&#8592;]</b> </p>
+    </div>
+    <div class="nextDiv" id="nextDiv"> 
+        <a id="rightArrow" class="next" onclick="plusSlides(1)">&#10095;</a>
+        <p id="nextKey" class="next-key"> <b>or press [&#8594;] </b></p>
+    </div>
+    <div id="spans"> </div>
+    
+    {{ block Slides }}
+
+    {{ endblock }}
+
+
+    <input type="hidden" id="sSlideSequence" name="sSlideSequence" val="">
+    <input type="hidden" id="sSlideTime" name="sSlideTime" val="">
+
+
+
+{{ endblock }}
+
+{{ block scripts }}
+    <script src="{% static 'global/js/Sliders.js' %}"></script>
+{{ endblock }}
+
+{{ block styles }}
+    <link rel="stylesheet" href="{% static 'global/css/Sliders.css' %}">
+{{ endblock }}

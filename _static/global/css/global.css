@@ -1,0 +1,189 @@
+* {
+    box-sizing: border-box;
+}
+
+.debug-info{ 
+    display: none;
+}
+
+:root{
+    --color1: #EDE7DC;
+    --color2: #F2F1F0;
+    --color3: #C0C0C0;
+    --color4:  #6C6A61;
+    --btn-color-active: #264c4f;
+    --btn-color: #3c797d;
+    --btn-border: #ada8a5;
+    --font-btn: white;
+}
+
+.page-content{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color1);
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#fix-cross {
+    font-size: 10vw;
+    font-weight: bolder;
+}
+
+.darkgreen-filter {
+    filter: invert(22%) sepia(87%) saturate(1371%) hue-rotate(93deg) brightness(96%) contrast(106%);
+    color: #000000;
+}
+
+.darkgoldenrod-filter {
+    filter: invert(49%) sepia(90%) saturate(1234%) hue-rotate(17deg) brightness(91%) contrast(91%);
+}
+
+.black-filter {
+    filter: invert(0%) sepia(3%) saturate(7486%) hue-rotate(147deg) brightness(104%) contrast(103%);
+}
+/* To get the filter code for a specific color: https://codepen.io/sosuke/pen/Pjoqqp */
+
+.center-msg {
+    display: flex;
+    flex-direction: column;
+    
+    width: 40vw;
+    text-align: justify;
+    align-items: center;
+}
+
+.continue-btn {
+    width: auto;
+    border-radius: 10%;
+    padding: 5px 10px;
+    background-color: var(--btn-color);
+    color: var(--font-btn);
+    margin-top: 20px;
+}
+
+.likert-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    margin-top: 20px;
+}
+
+.likert-left,.likert-right, .likert-btns  {
+    width: 7vw;
+    height: 7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: x-large;
+}
+
+.likert-left {
+    text-align:right;
+    justify-content: flex-end;
+    width: max-content;
+}
+
+.likert-right {
+    text-align:left;
+    justify-content: flex-start;
+    width: max-content;
+
+}
+
+.likert-btns {
+    border: 1px solid black;
+    background-color: var(--btn-color);
+    color: var(--font-btn);
+}
+
+.hidden {
+    display: none;
+}
+
+.img-instructions {
+    width: 35vw;
+    height: auto;
+}
+
+.hint{
+    /* background-color: white; */
+    color: red;
+    /* border: black 1px solid; */
+    /* border-radius: 10%; */
+}
+
+/* Color code for text */
+.bluebold, .blue {
+    font-weight: bold;
+    color: navy;
+    display: inline-block;
+}
+
+.greenbold, .green {
+    font-weight: bold;
+    color: green;
+    display: inline-block;
+}
+
+.redbold, .maroon {
+    font-weight: bold;
+    color: maroon;
+    display: inline-block;
+}
+
+/* Tooltip container */
+    div[class$='bold'].tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+  
+/* Tooltip text */
+  div[class$='bold'] .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(222, 222, 222, 0.849);
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  #tooltip-1 {
+    width: 40vw;
+    transform: translate(-50%,2em);
+    background-color: rgba(222, 222, 222, 0.849);
+    color: black;
+    padding: 10px
+  }
+
+  span.question {
+    background-color: darkgrey;
+    color: white;
+    width:15px;
+    height:15px;
+    display:inline-block;
+    border-radius:100%;
+    font-size:10px;
+    text-align:center;
+    text-decoration:none;
+    transform: translate(0,-20%);
+  }
+
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  div[class$='bold']:hover   .tooltiptext {
+    visibility: visible;
+  }

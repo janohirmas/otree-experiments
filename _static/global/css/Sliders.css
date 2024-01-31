@@ -1,0 +1,138 @@
+
+/* Spans */
+
+#spans {
+    position: absolute;
+    top: 95vh;
+    left: 50vw;
+    height: 2.5vh;
+    width: auto;
+    translate: -50% -50%;
+}
+
+.dot {
+    cursor: pointer;
+    height: 2.5vh;
+    width: 2.5vh;
+    margin: 0 2px;
+    background-color: var(--color3);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active.dot, .dot:hover {
+    background-color:  var(--color4)
+}
+
+/* Slide + styles */
+.slide, .slide * {box-sizing: border-box;}
+
+.slide {
+    padding: 10px;
+    position: absolute;
+    top: 47.5vh;
+    left: 50vw;
+    height: 90vh;
+    width: 85vw;
+    translate: -50% -50%;
+    background-color: var(--color2);
+    border-radius: 2%;
+    border: solid darkgray 3pt;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.slide > * {
+    flex: 1;
+    padding: 1em;
+    text-align: justify;
+}
+
+.slide .text-container {
+    max-width: 60vw;
+} 
+
+.slide .img-container {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.slide .columns {
+    display: flex;
+    flex-direction: row;
+    max-width: 90%;
+}
+
+.inactive.slide {
+    opacity: 0;
+    display: none;
+}
+
+.vertical.slide {
+    flex-direction: column;
+}
+
+/* Left and Right buttons */
+
+.prevDiv, .nextDiv {
+    position: absolute;
+    top: 50vh;
+    height: auto;
+    width: 5vw;
+    translate: -50% -50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+.prevDiv.hidden, .nextDiv.hidden {
+    visibility: hidden;
+}
+
+.prevDiv a, .nextDiv a {
+    color: black;
+    text-decoration: none;
+    font-size: 2.5vw;
+    padding: 0 10px;
+    border-radius: 10%;
+}
+
+.prevDiv a:hover, .nextDiv a:hover {
+    background-color: rgba(169, 169, 169, 0.3);
+}
+
+.prevDiv { left: 5vw;}
+.nextDiv {left: 95vw;}
+
+/* Hints and Questions */
+
+.hint {
+    color: red;
+}
+.hidden.hint {
+    visibility: hidden;
+}
+
+/* Text */
+h1,h2,h3,h4 {
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0;
+}
+
+.questions-container li {
+    list-style-type: none;
+}

@@ -1,0 +1,189 @@
+{"lQuestions" : [
+    {
+        "question": "What is your age?",
+        "name": "age",
+        "type": "shortOpen",
+        "validate": "validAge" ,
+        "invalidMessage": "warningAge"
+    },    
+    {
+        "question": "Which gender do you identify the most with?",
+        "name": "gender",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": [
+            "Female",
+            "Male",
+            "Other",
+            "Prefer not to say"
+        ]
+    },      
+    {
+        "question": "What is your nationality?",
+        "name": "nationality",
+        "type": "autocomplete",
+        "list": "countryList"
+    },
+    {
+        "question": "Have you ever participated in an incentivized economic experiment (such as this one) before?",
+        "name": "prev_exp",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3],
+        "labels": ["Yes","No","Not sure / don't remember"]
+    },
+    {
+        "question": "Where would you put yourself in the socioeconomic ladder?",
+        "name": "SNE",
+        "type": "Likert",
+        "likertMax": 10,
+        "limits": ["worst off","best off"],
+        "confirmRequired" : true
+    },    
+    {
+        "question": "Where would you place yourself in the political scale from extremely liberal to extremely conservative?",
+        "name": "political",
+        "type": "Likert",
+        "likertMax": 10,
+        "limits": ["Liberal (left)","Conservative (right)"],
+        "confirmRequired" : true
+    },    
+    {
+        "question": "What do you think is the purpose of this study? Describe shortly in your own words.",
+        "name": "purpose",
+        "type": "longOpen",
+        "blank": "True"   
+    },
+    {
+        "question": "During the experiment, did you use any specific strategy or rule of thumb when deciding. Briefly describe.",
+        "name": "strategy",
+        "type": "longOpen",
+        "blank": "True"
+    },
+    {
+        "question": "Did you think about any specific kind of job when assessing the candidates? If so, which one?",
+        "name": "job_type",
+        "type": "longOpen",
+        "blank": "True"
+    },
+    {
+        "question": "Do you have any experience with selection and/or recruitment processes?",
+        "name": "experience",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3],
+        "labels": ["Yes","No","Not sure / don't remember"]
+    },
+    {
+        "question": "What was the gender of the employer assigned to you?",
+        "name": "emp_gender",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["Man","Woman", "Other","Not sure / don't remember"]
+    },
+    {
+        "question": "What was the age range of the employer assigned to you?",
+        "name": "emp_age",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3],
+        "labels": ["20-30","31-40", "Not sure / don't remember"]
+    },
+    {
+        "question": "What was the math level of the employer assigned to you?",
+        "name": "emp_math",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["Low","Middle", "High","Not sure / don't remember"]
+    },
+    {
+        "question": "When choosing candidates, you may have been thinking of the employer assigned to you. <br> Which of these pairs represents better the connection you feel with your assigned employer? The circle with the E represents the employer.",
+        "name": "closeness",
+        "type": "imgBtn",
+        "direction": "horizontal wrap",
+        "path": "/static/global/figures/close",
+        "values": [1,2,3,4,5,6,7],
+        "labels": ["close1.png","close2.png","close3.png","close4.png","close5.png","close6.png","close7.png"]
+    },
+    {
+        "question": "If you could choose the employer for this study  (person making the hiring), what would be their gender?",
+        "name": "ideal_emp_gender",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["Man","Woman", "Other","I don't mind"]
+    },
+    {
+        "question": "If you could choose the employer for this study  (person making the hiring), what would be their age group?",
+        "name": "ideal_emp_age",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3],
+        "labels": ["20-30","31-40", "I don't mind"]
+    },
+    {
+        "question": "If you could choose the employer for this study (person making the hiring), what would be their math level?",
+        "name": "ideal_emp_math",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["Low","Middle", "High","I don't mind"]
+    },
+    {
+        "question": "The following questions have a correct answer. <b>For each correct answer you will get an additional 10p as a bonus.</b>",
+        "name": "",
+        "type": "text",
+        "confirmRequired":true
+    }  , 
+    {
+        "question": "Imagine we are throwing a five-sided die 50 times. On average, out of these 50 throws how many times would this five-sided die show an odd number (1, 3 or 5)",
+        "name": "Berlin1",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["5 out of 50 throws",
+        "25 out of 50 throws",
+        "30 out of 50 throws",
+        "None of these options"],
+        "correct" : 3
+    } ,
+    {
+        "question": "Out of 1,000 people in a small town 500 are members of a choir. Out of these 500 members in the choir 100 are men. Out of the 500 inhabitants that are not in the choir 300 are men. What is the probability that a randomly drawn man is a member of the choir? Please indicate the probability in percent",
+        "name": "Berlin2",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["10%",
+        "25%",
+        "40%",
+        "None of these options"],
+        "correct" : 2
+    }  ,
+    {
+        "question": "Imagine we are throwing a loaded die (6 sides). The probability that the die shows a 6 is twice as high as the probability of each of the other numbers. On average, out of these 70 throws, about how many times would the die show the number 6?",
+        "name": "Berlin3",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["20 out of 70 throws",
+        "23 out of 70 throws",
+        "35 out of 70 throws",
+        "None of these options"],
+        "correct" : 1
+    } ,       
+    {
+        "question": "In a forest 20% of mushrooms are red, 50% brown and 30% white. A red mushroom is poisonous with a probability of 20%. A mushroom that is not red is poisonous with a probability of 5%. What is the probability that a poisonous mushroom in the forest is red?",
+        "name": "Berlin4",
+        "type": "radio",
+        "direction": "horizontal wrap",
+        "values": [1,2,3,4],
+        "labels": ["4%",
+        "20%",
+        "50%",
+        "None of these options"],
+        "correct" : 3
+    }
+]}

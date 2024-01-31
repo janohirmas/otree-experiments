@@ -2,7 +2,22 @@
 {% load otree static %}
 
 {% block global_styles  %}
+    <link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+    {% comment %} These are the checks for Fullscreen out of focus  {% endcomment %}
+
 {% endblock %}
 
 {% block global_scripts  %}
+    <script src="{% static 'global/js/global.js' %}"></script> 
+    {% comment %} These are the checks for Fullscreen out of focus  {% endcomment %}
+{% endblock %}
+
+{% block content %}
+    <div class='page-content' id='page-content'> 
+        {% block PageContent %}
+        {% endblock %}
+    </div>
+
+    <input type="hidden" id="pagename" value="{{ C.NAME_IN_URL }}">
+    
 {% endblock %}

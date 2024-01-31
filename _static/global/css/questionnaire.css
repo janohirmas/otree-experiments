@@ -1,0 +1,231 @@
+:root {
+    --border-btn-color:  #C0C9CC;
+    --btn-color: #284196;
+    --font-btn: white;
+    --background-input: white;
+    --background-input-hover:  #C0C9CC;
+    --invalid-font-color: red;
+}
+
+.question-wrapper, .question-wrapper * {box-sizing: border-box;}
+
+.question-wrapper {
+    padding: 10px;
+    position: absolute;
+    top: 47.5vh;
+    left: 50vw;
+    height: 80vh;
+    width: 85vw;
+    translate: -50% -50%;
+    background-color: var(--color2);
+    border-radius: 2%;
+    border: solid darkgray 3pt;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: large;
+    z-index: 10;
+}
+
+.question-wrapper > * {
+    padding: 1em;
+    text-align: justify;
+}
+
+.question-wrapper > p, .text-container {
+    max-width: 60vw;
+    height: auto;
+}
+
+.inactive.question-wrapper {
+    display: none;
+}
+
+.multiple-opts {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 70vw;
+}
+
+.likert-row,.btns-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* font-size: x-large; */
+}
+.likert-row * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.likert-left {
+    text-align: right;
+    justify-content: flex-end;
+    margin-right: 1em;
+}
+
+.likert-right {
+    text-align: left;
+    justify-content: flex-start;
+    margin-left: 1em;
+}
+
+.likert-mid {
+    width: 5vw;
+    height: 5vw;
+    border: 1px solid var(--border-btn-color);
+    background-color: var(--btn-color);
+    color: var(--font-btn);
+}
+
+
+.likert-mid.selected, .likert-mid:active {
+    border: 2px solid black;
+}
+
+.questionnaire-btns {
+    width: 8vw;
+    height: 5vw;
+    border: 1px solid var(--border-btn-color);
+    background-color: var(--btn-color);
+    color: var(--font-btn);
+    margin: 0 2em;
+    border-radius: 5%;
+}
+
+/* Image buttons */
+.img-btn {
+    width: 15vw;
+    height: max-content;
+}
+
+.img-btn img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+.invalid-msg {
+    color: var(--invalid-font-color);
+    font-size: smaller;
+    padding: 5px;
+}
+
+.invalid-msg.hidden {
+    opacity: 0%;
+}
+/* Progress bar */
+.progress-bar {
+    display: inline-block;
+    position: relative;
+    z-index: -1;
+    width: 20vw;
+    opacity: 0.7;
+    text-align: center;
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0 10px;
+    height: 4vh;
+}
+
+
+.pbar-wrapper {
+    position: absolute;
+    top: 115%;
+    translate: 0 -100%;
+    font-size: smaller;
+    display: flex;
+    align-items: center;
+}
+
+/* Radio */
+
+.radio-opts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* font-size: x-large; */
+    width: fit-content;
+}
+
+.radio-opts.vertical { flex-direction: column;}
+.radio-opts.horizontal { 
+    flex-direction: row;
+    max-width: 75vw ;
+}
+.wrap {
+    flex-wrap: wrap;
+}
+
+
+.radio-item {
+    border: 1px solid var(--border-btn-color);
+    background-color: none;
+    border-radius: 5%;
+}
+.radio-item [type="radio"] {
+    display: none;
+}
+.radio-item label {
+    cursor: pointer;
+    display: block;
+    padding: 20px 60px;
+    text-align: center;
+}
+
+
+.radio-opts.vertical > .radio-item {
+    max-width: 50vw;
+    width: 100%;
+}
+
+.radio-opts.vertical > .radio-item + .radio-item { margin-top: 10px;}
+
+.radio-opts.horizontal >.radio-item {
+    min-height: 3em;
+    width: fit-content;
+    margin: 10px;
+}
+
+
+/* Autocomplete styling for open questions*/
+
+input[type="text"] {
+    font-size: smaller;
+    line-height: normal;
+    border: 1pt solid var(--border-btn-color);
+}
+
+.autocomplete-items {
+    position: fixed;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    padding: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--background-input);
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: var(--background-input-hover);
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
