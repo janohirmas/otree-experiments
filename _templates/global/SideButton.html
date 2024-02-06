@@ -1,0 +1,40 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+    <style>
+        #next-btn {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50vh;
+        }
+        
+        .left {
+            left: 20vw;
+        }
+
+        .right {
+            left: 80vw;
+        }
+    </style>
+{{ endblock }}
+
+{{ block scripts }}
+    <script>
+        // When page is fully loaded
+        document.addEventListener("DOMContentLoaded", ()=>{
+
+            document.getElementById('next-btn').classList.add(js_vars.sPosition)
+        })
+    </script>
+{{ endblock }}
+
+{{ block PageContent }}
+
+<!-- Button that gets randomized left or right -->
+<button type="button" class="continue-btn" id="next-btn" onclick="endPage()"> Continue </button>
+
+<!-- Input that records timestamps -->
+<input type="hidden" id="sStart" name="sStartCross">
+<input type="hidden" id="sEnd" name="sEndCross">
+
+{{ endblock }}

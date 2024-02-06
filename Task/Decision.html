@@ -23,7 +23,7 @@
     <div class="row" id="row-{{ attr.id }}">
         <div class="table-item right row-name" > {{ attr.name }} </div>
         {{ for v in attr.lValues }}
-            <div class="table-item mt-tgt cell cell-{{attr.id}}{{ forloop.counter }} row-{{attr.id}} col-{{forloop.counter}}" id="cell-{{attr.id}}{{ forloop.counter }}"> <img src="{{ static v }}" class="img-button"> </div>
+            <div class="table-item mt-tgt cell cell-{{attr.id}}{{ forloop.counter }} row-{{attr.id}} col-{{forloop.counter}} hide" id="cell-{{attr.id}}{{ forloop.counter }}"> <img src="{{ static v }}" class="img-button"> </div>
         {{ endfor }}
     </div>
     {{ endfor }}
@@ -31,7 +31,7 @@
         <div class="table-item right">  </div>
         {{ for col in C.lColNames}}
             <div class="table-item"> 
-                <button type="button" class="dec-btn " id="btn-{{ col }}" > Choose {{ col }} </button> 
+                <button type="button" class="dec-btn" id="btn-{{ col }}" > Choose {{ col }} </button> 
             </div>
         {{ endfor }}
 
@@ -44,7 +44,7 @@
 <input type="hidden" id="dRT" name="dRT_dec">
 <input type="hidden" id="sNames" name="sNames">
 <input type="hidden" id="sDT" name="sDT">
-<input type="hidden" id="iDec" name="iChooseB">
+<input type="hidden" id="sDec" name="sChoice">
 <input type="hidden" id="time2first" name="dTime2first">
 
 

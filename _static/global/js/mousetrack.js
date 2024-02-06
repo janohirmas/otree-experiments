@@ -15,6 +15,22 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(elem.title)
         CreateMT(elem,elem.id);
     }
+
+    // Decision Buttons 
+    lDecBtns = document.getElementsByClassName("dec-btn");
+    for (let i=0; i<lDecBtns.length; i++) {
+        let elem    = lDecBtns[i];
+        // Get column name from ID
+        let dec     = elem.id.split('-')[1];
+        console.log(dec)
+        // Add on-click function 
+        elem.addEventListener('click',()=>{
+            console.log('dec')
+            document.getElementById('sDec').value = dec;
+            endPage();
+        })
+        
+    }
     // Begin timer
     timeEnter = new Date();
     setInterval(()=>{

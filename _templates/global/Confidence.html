@@ -1,0 +1,54 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+    <link href="{% static 'global/css/decision.css' %}" rel="stylesheet">
+{{ endblock }}
+
+{{ block scripts }}
+    <script src="{% static 'global/js/decision.js' %}"></script> 
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", ()=>{
+            let lBtns = document.getElementsByClassName('likert-btns');
+            for (i=0;i<lBtns.length;i++) {
+                let value = lBtns[i].value;
+                lBtns[i].addEventListener("click", ()=>{
+
+                    document.getElementById('iConf').value = value;
+                    console.log(document.getElementById('iConf'))
+                    endPage();
+                } )
+            }
+        })
+
+        function submitLikert(iN){
+
+        }
+    </script>
+{{ endblock }}
+
+{{ block PageContent }}
+
+<h3> {{ C.sConfQuestion }}</h3>
+<div class="likert-wrapper">
+    <div class="likert-left"> {{ C.sLeftConf }}</div>
+    {{ for i in lScale }}
+        <button type="button" class="likert-btns" id="conf-{{ forloop.counter}}" value="{{ forloop.counter }}"> {{ forloop.counter }}</button>
+    {{ endfor }}
+    <div class="likert-right"> {{ C.sRightConf }}</div>
+
+</div>
+
+<div class="table-container" id="table-container">
+</div>
+
+<input type="hidden" id="sStart" name="sStartConf">
+<input type="hidden" id="sEnd" name="sEndConf">
+<input type="hidden" id="dRT" name="dRT_conf">
+<input type="hidden" id="iConf" name="iConfidence">
+
+
+
+
+{{ endblock }}

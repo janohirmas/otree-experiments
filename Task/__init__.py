@@ -47,32 +47,34 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # DVs
-    sChoice = models.StringField()
-    dRT_dec = models.FloatField()
+    sChoice     = models.StringField()
+    dRT_dec     = models.FloatField()
+    iConfidence = models.IntegerField()
+    dRT_conf    = models.FloatField()
 
     # Attention variables
     sNames      = models.LongStringField(blank=True)
     sDT         = models.LongStringField(blank=True)
 
-    # # DVs
-    # iChooseB    = models.IntegerField()
-    # iConfidence = models.IntegerField()
-    # dRT_conf    = models.FloatField()
-    # dTime2first = models.FloatField()
+    # # Timestamps
+    sStartDec   = models.StringField()
+    sEndDec     = models.StringField()
+    sStartCross = models.StringField()
+    sEndCross   = models.StringField()
+    sStartConf = models.StringField()
+    sEndConf   = models.StringField()
+
+
+    # Others 
+    sBetweenBtn = models.StringField()
 
 
     # # Candidates
     # sCandA      = models.StringField()
     # sCandB      = models.StringField()
-    # # Timestamps
-    # sStartDec   = models.StringField()
-    # sEndDec     = models.StringField()
-    # sStartCross = models.StringField()
-    # sEndCross   = models.StringField()
     # sStartConf  = models.StringField()
     # sEndConf    = models.StringField()
     # # Other
-    # sBetweenPosition = models.StringField()
 
     
 def creating_session(subsession):
@@ -85,13 +87,12 @@ def creating_session(subsession):
             lPos = C.lAttrID[:]         # Create hard copy of attributes
             random.shuffle(lPos)        # Shuffle order
             p.lPos = lPos               # Store it as a participant variable
+            #### Select trial for payment (from the first round after practice rounds to the last)
+            p.iSelectedTrial = random.randint(C.NUM_PROUNDS+1,C.NUM_ROUNDS)
 
     for player in subsession.get_players():
         p = player.participant
-        
-        # player.sCandA = p.lTrials[player.round_number-1][0]
-        # player.sCandB = p.lTrials[player.round_number-1][1]
-        # player.sBetweenPosition = random.sample(['left','right'],1)[0]
+        player.sBetweenBtn = random.choice(['left','right'])
 
 
 def attributeList(lValues,lPos):
@@ -144,58 +145,29 @@ class Decision(Page):
             print(f"Decision in selected trial recorded: {p.bChoseA}")
 
 
-class Between(Page):
+class FixCross(Page):
     form_model = 'player'
     form_fields = [ 'sStartCross','sEndCross' ]
+    template_name = 'global/FixCross.html'
 
-    @staticmethod 
+
+class SideButton(Page):
+    form_model = 'player'
+    form_fields = [ 'sStartCross','sEndCross' ]
+    template_name = 'global/SideButton.html'
+
+    @staticmethod
     def js_vars(player: Player):
         
         return dict(
-            position = player.sBetweenPosition
+            sPosition = player.sBetweenBtn
         )
-    
-    @staticmethod
-    def vars_for_template(player: Player):
-        p = player.participant
-
-        lAttr = []
-        for attr in p.lEmployerOrder:
-            match attr:
-                case 0:
-                    lAttr.append(f"is a {p.sEmployerGender.lower()}")
-                case 1:
-                    lAttr.append(f"is {p.sEmployerAge} <br> years old")
-                case 2:
-                    lAttr.append(f"has a {p.sEmployerMath} <br> maths level")
-
-        return dict(
-            lAttr = lAttr,
-        )
-
-class PracticeRoundMessage(Page):
-    template_name = 'global/Message.html'
-    form_model      = 'player'
-    form_fields     = []
-
-
-    @staticmethod 
-    def is_displayed(player: Player):
-        return str(player.round_number) in C.BetweenTrialMessages.keys()
-    
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            MessageText = C.BetweenTrialMessages[str(player.round_number)]
-        )
-
-
 
 
 class Confidence(Page):
     form_model      = 'player'
     form_fields     = [ 'sStartConf','sEndConf', 'dRT_conf','iConfidence']
-
+    template_name   = 'global/Confidence.html'
     
     @staticmethod
     def vars_for_template(player: Player):
@@ -206,4 +178,4 @@ class Confidence(Page):
 
 
 
-page_sequence = [Decision]
+page_sequence = [SideButton, Decision]

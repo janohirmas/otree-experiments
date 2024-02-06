@@ -18,7 +18,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = [
-    'lPos', # Position of attributes 
+    'lPos',                 # Position of attributes 
+    'iSelectedTrial',       # Trial selected for payment
 ]
 SESSION_FIELDS = []
 
