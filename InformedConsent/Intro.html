@@ -1,0 +1,80 @@
+{{ extends "global/Slider.html" }}
+
+{{ block Slides }}
+    <input type="hidden" id="no-checks">
+
+    <div class="slide">
+        <div class="text-container">
+            <h1> Welcome! </h1>
+            <ul>
+                <li>You are participating in a study funded by: <img class="UvA-logo" src="{% static C.figUvA_logo %}" /> </li>
+                <li>
+                    Your decisions and information provided will be recorded <b>anonymously</b> (Your response in this experiment cannot be traced back to you.).
+                </li>
+                <li>Your data will <u>only</u> be used for <b>academic research</b>. </li>
+                <li>You can choose at any point during the experiment to stop your participation and your data will be discarded.</li>
+                <li>
+                    If you choose to participate, you will have to make <u> multiple decisions</u> that can lead to <b>additional payments</b>. 
+                </li>
+                <li>The study will last about <b>{{ C.AvgDur }} minutes</b>.</li>
+                <li> We need you to start with the experiment right away. If you fail to proceed in 5 minutes, we will have to exclude you from the study. </li>
+            </ul>
+        </div>
+        
+        
+    </div>
+    <div class="slide">
+        <div class="text-container">
+            <p>
+                To participate in this experiment you need to:
+                <ul>
+                    <li> Be <b>18 or older</b>. </li>
+                    <li> Be fluent in <b>English</b>. </li>
+                    <li> Focus only on the experiment (it will take around {{ C.AvgDur }} minutes).</li>
+                    <li> Use your <b>computer</b>. The experiment does not work on phones or tablets. </li>
+                    <li> Set this window into <b>Fullscreen</b> mode (if you do not know how to do it, we will explain) </li>
+                    <li> Agree to start with the experiment right away. </li>
+                </ul>
+            </p>
+            <p style='text-align: justify;'>
+                We reserve the right to exclude you from payment if we detect that you are not paying attention 
+                (jumping between other windows or setting off the Fullscreen too many times) 
+                or you do not comply with any of the above mentioned requirements.
+            </p>
+            <!-- Check box T&C -->
+            <div class="checkBox">
+                <input type="checkbox" required id="TC" name="TC" value="check">
+                <label for="TC"> I agree to the <u>Terms and Conditions </u> above and to participate in this
+                    experiment.</label>
+            </div>
+            <br>
+            <button class="btn-primary"> Submit </button>
+        </div>
+        <input type="hidden" name="timeOut" id="timeOut" value='false'>
+    </div>
+
+    
+{{ endblock }}
+
+{% block app_scripts %}
+    <script>
+    </script>
+
+{% endblock %}
+
+{% block app_styles %}
+<style>
+
+    .otree-timer {
+        display: none;
+    }
+
+    .UvA-logo {
+        width: 20vw;
+        height: auto;
+    }
+
+
+
+</style>
+{% endblock %}

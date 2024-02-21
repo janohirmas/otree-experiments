@@ -6,6 +6,23 @@ SESSION_CONFIGS = [
         app_sequence=['Task'],
         num_demo_participants=1,
     ),
+    dict(
+        name='Questionnaire',
+        app_sequence=['Questionnaire'],
+        num_demo_participants=1,
+    ),
+    dict(
+        name='Instructions',
+        app_sequence=['Instructions'],
+        num_demo_participants=1,
+        treatment = 'random',
+    ),
+    dict(
+        name='Session',
+        app_sequence=['InformedConsent','Instructions','Task','Questionnaire'],
+        num_demo_participants=1,
+        treatment = 'random', # Randomize between-subject treatment. 
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -20,6 +37,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 PARTICIPANT_FIELDS = [
     'lPos',                 # Position of attributes 
     'iSelectedTrial',       # Trial selected for payment
+    'bTimeout',             # Participant timed-out
+    'sTreatment',           # Treatment name
 ]
 SESSION_FIELDS = []
 

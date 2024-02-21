@@ -1,0 +1,23 @@
+{{ extends "global/Page.html" }}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded",()=>{
+        let Button = document.getElementById('return-btn')
+        Button.addEventListener('click',()=>{
+            window.open(js_vars.sLinkReturn, "_blank");
+        })
+    })
+</script>
+{% endblock %}
+
+{{ block PageContent }}
+<input type="hidden" id="no-checks">
+
+    <div class="center-msg">
+        You remained iddle for more than 5 minutes. <br> We regret to inform you that we have to exclude you from the experiment. <br>
+    
+        Please return your submission. 
+        <button type="button" class="continue-btn" id="return-btn"> Return Submission  </button>
+    </div>
+{{ endblock }}

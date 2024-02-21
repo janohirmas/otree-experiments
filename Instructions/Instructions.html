@@ -1,0 +1,176 @@
+{{ extends "global/Slider.html" }}
+
+
+{{ block Slides }}
+<!-- <input type="hidden" id="no-checks"> -->
+
+    <!-- Slide 1a -->
+    <div class="slide"> 
+        <div class="text-container">
+            <h2> The experiment - in short: </h2>
+            <p> Briefly explain what participants will do.  </p>
+            <ol>
+                <li> I use short bullet points. And an image on the side. </li>
+                <li> <div class="green">Color coded</div> text can help guide participants a bit more </li>
+                <li> I usually make the pictures in powerpoint. </li>
+            </ol>
+            <i>Press → to continue reading </i>
+        </div>
+        <div class="img-container"> <img src="{{ static C.path1 }}" class="img-instructions" alt="example of decision screen" id="img-example1"> </div>
+    </div>
+
+
+    <!-- Slide 2 -->
+    <div class="slide vertical"> 
+        <div class="img-container"> <img src="{{ static C.path2 }}" class="img-instructions" alt="example of decision screen" id="img-example2"> </div>
+        <div class="text-container">
+            <h2> Deeper explanation: </h2>
+            <ul>
+                <li> In simple sentence (and probably a few slides), explain your experiment step by step. </li>
+                <li> Remember that <div class="redbold">color-coded</div>, <b>bold</b> or <i>italic</i> text might help you making participants focus on the info you want them to read. </li>
+                <li> You can put horizontal pictures too! </li>
+            </ul>
+
+        </div>
+    </div> 
+
+    
+    <!-- Slide 3 -->
+    <div class="slide"> 
+        <div class="text-container questions-container">
+            <ul>
+                <!--Question 1-->
+                <li>
+                    <div class="inst-question">
+                        <!-- Question-->
+                        <label for="Q1"> In the last slide, I put control questions (Answer: Yes)</label>
+                    </div>
+                    <div class="answer-field">
+                        <select name="Q1" id="Q1" class="dropdown ControlQuestions">
+                            <option value="nothing">--Select--</option>
+                            <option value="a">Yes</option>
+                            <option value="b">No</option>
+                            <option value="c">Perhaps </option>
+                            <option value="d">I don't know</option>
+                        </select>
+                    </div>
+                </li>
+
+                <!-- Hint -->
+                <div class="hint" id="hint1">
+                    Incorrect: Go back to the previous slide
+                </div>
+
+                <!--Question 2-->
+                <li>
+                    <div class="inst-question">
+                        <label for="Q2"> In the init.file, you put the correct answers. Check what happens if the answers are wrong. (Answer: 20)  </label>
+                    </div>
+                    <div class="answer-field">
+                        <select name="Q2" id="Q2" class="dropdown ControlQuestions">
+                            <option value="nothing">--Select--</option>
+                            <option value="a"> 10 </option>
+                            <option value="b"> 20 </option>
+                            <option value="c"> 30  </option>
+                        </select>
+                    </div>
+                </li>
+
+                <div class="hint" id="hint2">
+                    Incorrect: Go back to the slide "Add a title"
+                </div>
+
+                <!-- Question 3 -->
+                <li>
+                    <div class="inst-question">
+                        <label for="Q5"> You can put as many questions as you want (Answer: True)  </label>
+                    </div>
+                    <select name="Q5" id="Q5" class="dropdown ControlQuestions">
+                        <option value="nothing">--Select--</option>
+                        <option value="a"> True </option>
+                        <option value="b"> False </option>
+                    </select>
+                </li>
+                <div class="hint" id="hint5">
+                    Incorrect: see slide "Title where answer is"
+                </div>
+
+
+                <!--Question 4-->
+                <li>
+                    <div class="inst-question">
+                        <label for="Q4"> I always put at least one numeric question so they cannot just click through (Answer: {{ C.iNumTrials }})</label>
+                    </div>
+                    <div class="answer-field">
+                        <!-- Input field -->
+                        <input type="text" name="Q7" id="Q7" class="ControlQuestions">
+                    </div>
+                </li>
+                <div class="hint" id="hint7">
+                    Incorrect: see the previous slide
+                </div>
+                <li>
+            <!-- Submit answers and Next button (next button appears when user answers all questions correctly)-->
+                <button type="button" id="submitAnswer" class="button" onclick="ValidateSaveSubmit()"> Submit </button>
+        </div>
+        
+    </div>
+    
+{{ endblock }}
+
+{{ block app_styles }}
+<link href="{% static 'global/css/global.css' %}" rel="stylesheet">
+
+<style>
+    /* If there are small things, you can always define them within this page. If too much style changes, make a new css file */
+    #img-example {
+        width: 50vw;
+        height: auto;
+    }
+
+    #img-example2 {
+        width: 75vw;
+        height: auto;
+    }
+
+    .text-container {
+        font-size: larger;
+    }
+</style>
+{{ endblock }}
+
+{{ block app_scripts }}
+<script>
+
+  const lSolutions    =  js_vars.lSolutions;     // Solutions for Check-up questions in the last slide
+
+  function ValidateSaveSubmit() {
+    validateAnswers();
+  }
+
+  window.addEventListener("DOMContentLoaded", ()=>{
+    // Get divs to add tooltips
+    let lGreen = document.getElementsByClassName("greenbold");
+    let lBlue = document.getElementsByClassName("bluebold");
+    let lRed = document.getElementsByClassName("redbold");
+    // Green tooltip
+    for (let i=0;i<lGreen.length;i++) {
+        let span = document.createElement('span')
+        span.innerHTML = "You";
+        span.classList.add("tooltiptext")
+        lGreen[i].appendChild(span);
+    }
+
+    // Blue tooltip
+    for (let i=0;i<lBlue.length;i++) {
+        let span = document.createElement('span')
+        span.innerHTML = "Previous participants";
+        span.classList.add("tooltiptext")
+        lBlue[i].appendChild(span);
+    }
+  })
+</script>
+
+{{ endblock }}
+
+

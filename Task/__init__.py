@@ -178,4 +178,4 @@ class Confidence(Page):
 
 
 
-page_sequence = [SideButton, Decision]
+page_sequence = [SideButton, Decision, Confidence]
