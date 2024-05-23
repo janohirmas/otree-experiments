@@ -51,10 +51,10 @@ class Player(BasePlayer):
     dRT_dec     = models.FloatField()
     iConfidence = models.IntegerField()
     dRT_conf    = models.FloatField()
-
+    dTime2first = models.FloatField()
     # Attention variables
-    sNames      = models.LongStringField(blank=True)
-    sDT         = models.LongStringField(blank=True)
+    sNames      = models.LongStringField()
+    sDT         = models.LongStringField()
 
     # # Timestamps
     sStartDec   = models.StringField()
@@ -122,8 +122,8 @@ def attributeList(lValues,lPos):
 
 class Decision(Page):
     form_model      = 'player'
-    form_fields     = [ 'sChoice']
-    # form_fields     = [ 'sStartDec','sEndDec', 'dRT_dec', 'sNames', 'sDT' , 'dTime2first', 'sChoice']
+    # form_fields     = [ 'sChoice']
+    form_fields     = [ 'sStartDec','sEndDec', 'dRT_dec', 'sNames', 'sDT' , 'dTime2first', 'sChoice']
     
     @staticmethod
     def vars_for_template(player: Player):
@@ -141,8 +141,8 @@ class Decision(Page):
         p = player.participant
         
         if player.round_number == p.iSelectedTrial: 
-            p.bChoseA = player.iChooseB==0   
-            print(f"Decision in selected trial recorded: {p.bChoseA}")
+            p.sChoice = player.sChoice   
+            print(f"Decision in selected trial recorded: {p.sChoice}")
 
 
 class FixCross(Page):

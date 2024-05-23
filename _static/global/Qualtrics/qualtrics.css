@@ -1,0 +1,19 @@
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.hidden { 
+    display: none;
+}
+.head {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/d1/Black_circle.png);
+    width: 100px;
+}
+.cell img {
+    width: 100px;
+    height: 100px;
+}

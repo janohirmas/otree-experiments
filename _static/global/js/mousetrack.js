@@ -12,7 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
     lButtonsMT = document.getElementsByClassName(sTypeReveal);
     for (let i=0; i<lButtonsMT.length; i++) {
         let elem = lButtonsMT[i];
-        console.log(elem.title)
         CreateMT(elem,elem.id);
     }
 
@@ -22,11 +21,11 @@ window.addEventListener('DOMContentLoaded', () => {
         let elem    = lDecBtns[i];
         // Get column name from ID
         let dec     = elem.id.split('-')[1];
-        console.log(dec)
         // Add on-click function 
         elem.addEventListener('click',()=>{
-            console.log('dec')
             document.getElementById('sDec').value = dec;
+            document.getElementById('sNames').value = sNames;
+            document.getElementById('sDT').value = sDT;
             endPage();
         })
         
@@ -53,7 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // returns:         void
 // *********************************************************************
 
-function updateMT(id) {
+function updateMT() {
     // Store/update current time
     let now = new Date();
     let dt = now - timeEnter;
@@ -61,16 +60,12 @@ function updateMT(id) {
     // Save dwell time on AOI
     if (sDT.length>0) {
         sDT =  `${sDT},${dt}`;
-    } else {
-        sDT = `${dt}`;
-        // If first fixation, also record time to first fixation
-        document.getElementById('time2first').value = timeEnter - dt - startTime;
-    }
-    // Update to current label
-    if (sNames.length>0) {
         sNames = `${sNames},${sCurrent}`;
     } else {
+        sDT = `${dt}`;
         sNames = `${sCurrent}`;
+        // If first fixation, also record time to first fixation
+        document.getElementById('time2first').value = timeEnter - dt - startTime;
     }
 }
 
@@ -107,7 +102,6 @@ function hideEverything() {
 
 
 function activateMT(tgt) {
-    console.log(tgt)
     hideEverything();
     let lTgt = document.getElementsByClassName(`mt-tgt ${tgt}`);
     for (let i=0;i<lTgt.length; i++) {
@@ -130,13 +124,16 @@ function CreateMT(elem,tgt) {
         elem.classList.add('hover');
         timeEnter = new Date();
         sCurrent = elem.id;
-        activateMT(tgt)
+        console.log('entering');
+        activateMT(tgt);
     })
     elem.addEventListener("mouseleave", ()=>{
         elem.classList.remove('hover');
+        sCurrent = elem.id;
+        updateMT(elem.id);
+        console.log('leaving')
         sCurrent = '';
-        updateMT(elem.id)
-        hideEverything();
+        // hideEverything();
     })
 }
 
