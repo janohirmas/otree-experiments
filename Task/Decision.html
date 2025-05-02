@@ -2,6 +2,7 @@
 
 {{ block styles }}
     <link href="{% static 'global/css/mousetrack.css' %}" rel="stylesheet">
+
 {{ endblock }}
 
 {{ block scripts }}
@@ -10,12 +11,12 @@
 {{ endblock }}
 
 {{ block PageContent }}
-<div class="test-text" id="test-text"></div>
+<!-- <div class="test-text" id="test-text"></div> -->
 
 <div class="table-container" id="table-container">
     <div class="row-colnames top" id="row-colnames"> 
         <div class="table-item right">  </div>
-        {{ for col in C.lColNames}}
+        {{ for col in C.COL_NAMES}}
         <div class="table-item col" id="col-{{ forloop.counter }}"> {{ col }} </div>
         {{ endfor }}
     </div>
@@ -23,13 +24,19 @@
     <div class="row" id="row-{{ attr.id }}">
         <div class="table-item right row-name" > {{ attr.name }} </div>
         {{ for v in attr.lValues }}
-            <div class="table-item mt-tgt cell cell-{{attr.id}}{{ forloop.counter }} row-{{attr.id}} col-{{forloop.counter}} hide" id="cell-{{attr.id}}{{ forloop.counter }}"> <img src="{{ static v }}" class="img-button"> </div>
+            <div class="table-item mt-tgt cell cell-{{attr.id}}{{ forloop.counter }} row-{{attr.id}} col-{{forloop.counter}} hide" id="cell-{{attr.id}}{{ forloop.counter }}">
+            {{ if attr.id == 'N' }}
+                {{ v }}
+            {{ else }}
+                <img src="{{ static v }}" class="img-button">
+            {{ endif }}
+            </div>
         {{ endfor }}
     </div>
     {{ endfor }}
     <div class="row btn-row">
         <div class="table-item right">  </div>
-        {{ for col in C.lColNames}}
+        {{ for col in C.COL_NAMES}}
             <div class="table-item"> 
                 <button type="button" class="dec-btn" id="btn-{{ col }}" > Choose {{ col }} </button> 
             </div>

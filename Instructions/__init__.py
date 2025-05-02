@@ -60,8 +60,8 @@ def creating_session(subsession):
             # Store any treatment variables or things that stay constant across rounds/apps
             p = player.participant
             # When creating the session, you can define whether you have a random treatment or a specific one. 
-            if s.config['treatment']=='random':
-                p.sTreatment = random.choice(['Control','Low','High'])
+            if s.config['treatmentLogic']=='random':
+                p.sTreatmentLogic = random.choice(['value','nudge'])
             else:
                 p.sTreatment = s.config['treatment']
             # Randomly selected trial

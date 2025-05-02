@@ -11,23 +11,25 @@ Your app description
 class C(BaseConstants):
     NAME_IN_URL = 'Task'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 10
-    NUM_PROUNDS = 1
+    NUM_RROUNDS = 7 # Real Rounds
+    NUM_PROUNDS = 3 # Practice Rounds
+    NUM_ROUNDS = NUM_PROUNDS + NUM_RROUNDS
     # List of attributes (id)
-    lAttrID     = ['p','q','s','t']
-    lAttrNames  = ['Price','Quality','Sustainability','Tax']
+    ATTR_ID     = ['P','Q','S','N']
+    ATTR_NAMES  = ['Price','Quality','Sustainability','Advice']
     # Template vars
-    lColNames   = ['A','B','C','D']
-
+    COL_NAMES   = ['A','B']
+    # Paths 
+    PATH_TRIALS = '_static/global/files/dataNudge.csv'
+    IMG_PRICE      = "global/figures/P/"
+    IMG_S            = "global/figures/S/S"
+    IMG_Q            = "global/figures/Q/Q"
 
     # In between round messages
     BetweenTrialMessages = {
         "1": f"Now you will have {NUM_PROUNDS} practice rounds.", 
         str(int(NUM_PROUNDS+1)): "The practice rounds are over."
         }
-    # Image 
-    imgCandidate    = "global/figures/candidate.png"
-    imgNumbers      = "global/figures/numbers/n_"
     # Confidence page
     iLikertConf     = 7
     sConfQuestion   = f"From 1 to {iLikertConf}, how confident are you on your choice?"
@@ -67,24 +69,36 @@ class Player(BasePlayer):
 
     # Others 
     sBetweenBtn = models.StringField()
+    sustRight = models.BooleanField() # true if sustainable product on the right
 
 
-    # # Candidates
-    # sCandA      = models.StringField()
-    # sCandB      = models.StringField()
-    # sStartConf  = models.StringField()
-    # sEndConf    = models.StringField()
-    # # Other
+    # Trial Attributes
+    originalTrial = models.IntegerField()
+    P1 = models.FloatField()
+    P2 = models.FloatField()
+    Q1 = models.IntegerField()
+    Q2 = models.IntegerField()
+    S1 = models.IntegerField()
+    S2 = models.IntegerField()
+    Nudge = models.StringField()
 
-    
 def creating_session(subsession):
     # Load Session variables
     s = subsession.session 
     if subsession.round_number==1:
         for player in subsession.get_players():
             p = player.participant
+            #### Randomize trials 
+            dbTrials = pd.read_csv(C.PATH_TRIALS)
+            dbPractice  = dbTrials.iloc[:C.NUM_PROUNDS]  # Keep the first NUM_PROUNDS rows unchanged
+            dbReal      = dbTrials.iloc[C.NUM_PROUNDS:].sample(frac=1).reset_index(drop=True)
+            dbTrials = pd.concat([dbPractice, dbReal], ignore_index=True)
+            ### Randomize side of products
+            dbTrials['sustRight'] = rnd.choice([True, False], size=len(dbTrials))
+            p.dbTrials = dbTrials
+            # print(dbTrials)
             #### Randomize order of attributes
-            lPos = C.lAttrID[:]         # Create hard copy of attributes
+            lPos = C.ATTR_ID[:]         # Create hard copy of attributes
             random.shuffle(lPos)        # Shuffle order
             p.lPos = lPos               # Store it as a participant variable
             #### Select trial for payment (from the first round after practice rounds to the last)
@@ -93,20 +107,56 @@ def creating_session(subsession):
     for player in subsession.get_players():
         p = player.participant
         player.sBetweenBtn = random.choice(['left','right'])
+        row = int(player.round_number-1)
+        db = p.dbTrials
+        trialValues = db.iloc[row].astype(object).to_dict()
+        print(trialValues)
+        player.originalTrial    = trialValues['Trial']
+        player.P1               = trialValues['P1']
+        player.P2               = trialValues['P2']
+        player.Q1               = trialValues['Q1']
+        player.Q2               = trialValues['Q2']
+        player.S1               = trialValues['S1']
+        player.S2               = trialValues['S2']
+        player.Nudge            = trialValues['NUDGE']
+        player.sustRight        = trialValues['sustRight']
+        ## function that retrieves data from csv to player variables. 
 
+def numToFloat(value):
+    formatted = f"{value:.1f}"  # Ensures one decimal
+    return f"{formatted.replace('.', '_')}"
 
-def attributeList(lValues,lPos):
+def attributeList(player):
+    lPos = player.participant.lPos
 
     lAttributes = []
     lOrder      = []
-    for i in range(len(C.lAttrID)):
-        id                  = C.lAttrID[i]      
-        name                = C.lAttrNames[i]  
+    for i in range(len(C.ATTR_ID)):
+        id                  = C.ATTR_ID[i]      
+        name                = C.ATTR_NAMES[i]  
         # Store the order of the list
         lOrder.append(lPos.index(id))
+
         lPaths = []
-        for v in lValues[i]:
-            lPaths.append(f"{C.imgNumbers}{v}.png")
+        values = []
+        path = []
+        match id:
+            case 'P': 
+                values  = [numToFloat(player.P1),numToFloat(player.P2)]
+                path    = C.IMG_PRICE
+            case 'Q':
+                values  = [player.Q1, player.Q2]
+                path    = C.IMG_Q
+            case 'S':
+                values  = [player.S1,player.S2]
+                path    = C.IMG_S
+            case 'N':
+                values  = [player.Nudge]
+        if player.sustRight:
+            print(f'reverse {values}{values[::-1]}')
+            values = values[::-1]
+        for v in values:
+            lPaths.append(f"{path}{v}.png")
         # Create object with all the relevant variables
         Attr = {
             'id'        : id,
@@ -131,9 +181,9 @@ class Decision(Page):
         p = player.participant
         lPos = p.lPos      
         # Candidates values          
-        lValues = [rnd.randint(0,6,len(C.lColNames)) for _ in range(len(C.lAttrID))]
+        # lValues = [rnd.randint(0,6,len(C.COL_NAMES)) for _ in range(len(C.ATTR_ID))]
         return dict(
-            lAttr = attributeList(lValues,lPos),
+            lAttr = attributeList(player),
         )
     
     @staticmethod

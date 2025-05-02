@@ -36,7 +36,7 @@
 }
 
 .table-item {
-    width : 12.5vw;
+    width : 10vw;
     text-align: center;
     
 }
@@ -76,4 +76,15 @@
 
 .hide {
     opacity: 0;
+}
+
+/* SPECIFIC TO YOUR EXPERIMENT */
+/* If you need to override any css code, do it here  */
+.img-btn {
+    width: 10vw;
+    height: auto;
+}
+.cell-N {
+    width: 20vw;
+    height: auto;
 }

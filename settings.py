@@ -15,7 +15,8 @@ SESSION_CONFIGS = [
         name='Instructions',
         app_sequence=['Instructions'],
         num_demo_participants=1,
-        treatment = 'random',
+        treatmentLogic = 'random',
+        treatmentAI = 'random',
     ),
     dict(
         name='Session',
@@ -35,13 +36,16 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = [
+    'dbTrials',             # Database with all trial info
     'lPos',                 # Position of attributes 
     'iSelectedTrial',       # Trial selected for payment
     'bTimeout',             # Participant timed-out
-    'sTreatment',           # Treatment name
     'sChoice',              # Decision of selected trial
+    'sTreatmentLogic',           # Treatment name
+    'sTreatmentFriendly',           # Treatment name
 ]
-SESSION_FIELDS = []
+SESSION_FIELDS = [
+]
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
