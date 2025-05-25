@@ -3,7 +3,7 @@ var     lButtonsMT, timeEnter;
 var     sNames  = '';
 var     sDT     = '';
 var     sCurrent = '';
-var     sTypeReveal = 'cell';
+var     sTypeReveal = 'row';
 
 // When page is loaded
 window.addEventListener('DOMContentLoaded', () => {

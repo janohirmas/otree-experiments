@@ -3,7 +3,7 @@ from os import environ
 SESSION_CONFIGS = [
     dict(
         name='task',
-        app_sequence=['Task'],
+        app_sequence=['TaskWithin'],
         num_demo_participants=1,
     ),
     dict(

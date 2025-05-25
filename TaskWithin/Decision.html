@@ -1,0 +1,59 @@
+{{ extends "global/Page.html" }}
+
+{{ block styles }}
+    <link href="{% static 'global/css/mousetrack.css' %}" rel="stylesheet">
+
+{{ endblock }}
+
+{{ block scripts }}
+    <script src="{% static 'global/js/mousetrack.js' %}"></script>  
+
+{{ endblock }}
+
+{{ block PageContent }}
+<!-- <div class="test-text" id="test-text"></div> -->
+
+<div class="table-container" id="table-container">
+    <div class="row-colnames top" id="row-colnames"> 
+        <div class="table-item right">  </div>
+        {{ for col in C.COL_NAMES}}
+        <div class="table-item col" id="col-{{ forloop.counter }}"> {{ col }} </div>
+        {{ endfor }}
+    </div>
+    {{ for attr in lAttr }}
+    <div class="row" id="row-{{ attr.id }}">
+        <div class="table-item right row-name" > {{ attr.name }} </div>
+        {{ for v in attr.lValues }}
+            <div class="table-item mt-tgt cell cell-{{attr.id}}{{ forloop.counter }} row-{{attr.id}} col-{{forloop.counter}} hide" id="cell-{{attr.id}}{{ forloop.counter }}">
+            {{ if attr.id == 'N' }}
+                {{ v }}
+            {{ else }}
+                <img src="{{ static v }}" class="img-button">
+            {{ endif }}
+            </div>
+        {{ endfor }}
+    </div>
+    {{ endfor }}
+    <div class="row btn-row">
+        <div class="table-item right">  </div>
+        {{ for col in C.COL_NAMES}}
+            <div class="table-item"> 
+                <button type="button" class="dec-btn" id="btn-{{ col }}" > Choose {{ col }} </button> 
+            </div>
+        {{ endfor }}
+
+       
+    </div>
+</div>
+
+<input type="hidden" id="sStart" name="sStartDec">
+<input type="hidden" id="sEnd" name="sEndDec">
+<input type="hidden" id="dRT" name="dRT_dec">
+<input type="hidden" id="sNames" name="sNames">
+<input type="hidden" id="sDT" name="sDT">
+<input type="hidden" id="sDec" name="sChoice">
+<input type="hidden" id="time2first" name="dTime2first">
+
+
+
+{{ endblock }}
